@@ -1,23 +1,37 @@
 {
-  "name": "vue-app-loader",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@zesty-io/vue-app-loader",
+  "version": "1.0.0-alpha.1",
   "type": "module",
+  "main": "./cjs/index.js",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "author": "Zesty.io <developers@zesty.io>",
+  "license": "ISC",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "build:esm": "babel src --out-dir es --extensions '.ts,.tsx'",
+    "build:cjs": "babel src --out-dir cjs --extensions '.ts,.tsx' --presets=@babel/preset-env,@babel/preset-typescript --plugins=@babel/plugin-transform-modules-commonjs",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:types",
+    "release": "npm run build && npm publish --access public"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
   },
   "dependencies": {
     "@zesty-io/app-sdk": "file:../app-sdk/zesty-io-app-sdk-1.0.0-alpha.1.tgz",
-    "js-cookie": "^3.0.5",
-    "vue": "^3.3.8"
+    "js-cookie": "^3.0.5"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
     "@types/js-cookie": "^3.0.6",
-    "@vitejs/plugin-vue": "^4.5.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0",
-    "vue-tsc": "^1.8.22"
-  }
+    "typescript": "^5.2.2"
+  },
+  "files": [
+    "cjs",
+    "es"
+  ]
 }
