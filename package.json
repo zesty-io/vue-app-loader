@@ -8,8 +8,8 @@
   "author": "Zesty.io <developers@zesty.io>",
   "license": "ISC",
   "scripts": {
-    "build:esm": "babel src --out-dir es --extensions '.ts,.tsx'",
-    "build:cjs": "babel src --out-dir cjs --extensions '.ts,.tsx' --presets=@babel/preset-env,@babel/preset-typescript --plugins=@babel/plugin-transform-modules-commonjs",
+    "build:esm": "babel src --out-dir es --extensions '.ts'",
+    "build:cjs": "babel src --out-dir cjs --extensions '.ts' --presets=@babel/preset-env,@babel/preset-typescript --plugins=@babel/plugin-transform-modules-commonjs",
     "build:types": "tsc --emitDeclarationOnly",
     "build": "npm run build:esm && npm run build:cjs && npm run build:types",
     "release": "npm run build && npm publish --access public"
