@@ -1,12 +1,12 @@
 {
   "name": "@zesty-io/vue-app-loader",
   "version": "1.0.0-alpha.1",
+  "license": "Commons Clause License Condition v1.0",
+  "author": "Zesty.io<developers@zesty.io>",
   "type": "module",
   "main": "./cjs/index.js",
   "module": "./es/index.js",
   "types": "./es/index.d.ts",
-  "author": "Zesty.io <developers@zesty.io>",
-  "license": "ISC",
   "scripts": {
     "build:esm": "babel src --out-dir es --extensions '.ts'",
     "build:cjs": "babel src --out-dir cjs --extensions '.ts' --presets=@babel/preset-env,@babel/preset-typescript --plugins=@babel/plugin-transform-modules-commonjs",
