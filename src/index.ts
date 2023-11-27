@@ -10,6 +10,7 @@ interface SDKState {
   logout: () => void;
   request: (rl: string, data?: any) => Promise<any>;
   initiateSSOAuthentication: (service: "google" | "github" | "azure") => void;
+  ssoErrorMessage: string;
 }
 
 interface AppLoaderOptions {
@@ -38,6 +39,7 @@ function createAppLoader(
     logout: () => {},
     request: () => Promise.resolve({}),
     initiateSSOAuthentication: () => {},
+    ssoErrorMessage: "",
   });
 
   function init() {
@@ -49,8 +51,14 @@ function createAppLoader(
 
     // On SSO success get token from cookie and re-init SDK
     SDK.setSSOSuccessCallback(() => {
+      state.ssoErrorMessage = "";
       state.token = Cookies.get(authCookie || "") || "";
       init();
+    });
+
+    // On SSO failure store error message
+    SDK.setSSOErrorCallback((errorMessage: string) => {
+      state.ssoErrorMessage = errorMessage;
     });
 
     SDK.init(authServiceUrl, state.token)
